@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joaoferretti
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/ponto","/select"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/ponto", "/select", "/update", "/delete"})
 public class PontoController extends HttpServlet {
-    
+
     DAO dao = new DAO();
     HorarioTrabalho horario = new HorarioTrabalho();
     ArrayList<HorarioTrabalho> tabelaHorarioTrabalho;
@@ -30,8 +30,6 @@ public class PontoController extends HttpServlet {
     public PontoController() {
         super();
     }
-    
-    
 
     @Override
     public void init() {
@@ -45,17 +43,20 @@ public class PontoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
-        if(action.equals("/ponto")){
+        if (action.equals("/ponto")) {
             horarios(request, response);
-        }else if (action.equals("/insert")) {
+        } else if (action.equals("/update")) {
+            editarContato(request, response);
+        } else if (action.equals("/insert")) {
             novoHorarioTrabalho(request, response);
-        }else if (action.equals("/select")) {
+        } else if (action.equals("/delete")) {
+            removerContato(request, response);
+        } else if (action.equals("/select")) {
             listarHorarios(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "index.html");
         }
-        else{
-            response.sendRedirect(request.getContextPath()+"index.html");
-        }
-       
+
     }
 
     @Override
@@ -66,12 +67,12 @@ public class PontoController extends HttpServlet {
 
     protected void horarios(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ArrayList<HorarioTrabalho> listHorariosTrabalhados = dao.listarHorarioTrabalho();
-        
+
         //Encaminhar a Lista ao Documento index.jsp
         request.setAttribute("horario", listHorariosTrabalhados);
         RequestDispatcher rd = request.getRequestDispatcher("ponto.jsp");
         rd.forward(request, response);
-       
+
     }
 
     protected void novoHorarioTrabalho(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -84,19 +85,38 @@ public class PontoController extends HttpServlet {
         dao.insertHorarioTrabalho(horario);
         response.sendRedirect("ponto");
     }
-    
+
     protected void listarHorarios(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
+
         horario.setId(request.getParameter("id"));
-        
+
         dao.selecionarHorarioTrabalho(horario);
-        
+
         request.setAttribute("id", horario.getId());
         request.setAttribute("entrada", horario.getEntrada());
         request.setAttribute("saida", horario.getSaida());
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
         rd.forward(request, response);
+    }
+
+    protected void editarContato(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        horario.setId(request.getParameter("id"));
+        horario.setEntrada(request.getParameter("entrada"));
+        horario.setSaida(request.getParameter("saida"));
+        dao.alterarHorarioTrabalho(horario);
+        response.sendRedirect("ponto");
+
+    }
+
+    protected void removerContato(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        String id = request.getParameter("id");
+        horario.setId(id);
+        dao.deletarContato(horario);
+        response.sendRedirect("ponto");
+
     }
 
 }

@@ -88,6 +88,38 @@ public class DAO implements Serializable {
             System.out.println(e);
         }
     }
+    
+    public void alterarHorarioTrabalho(HorarioTrabalho horario){
+    
+        String update = "update horariotrabalho set entrada=?, saida=? where id=?";
+        try{
+             Connection con = conectar();
+             PreparedStatement pst = con.prepareStatement(update);
+             pst.setString(1, horario.getEntrada());
+             pst.setString(2, horario.getSaida());
+             pst.setString(3, horario.getId());
+             pst.executeUpdate();
+             con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    public void deletarContato(HorarioTrabalho horario){
+        
+        String delete = "delete from horariotrabalho where id=?";
+        try{
+            Connection con = conectar();
+            PreparedStatement pst = con.prepareStatement(delete);
+            pst.setString(1, horario.getId());
+            pst.executeUpdate();
+            con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
    
     
 }

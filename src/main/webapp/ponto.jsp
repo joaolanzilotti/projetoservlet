@@ -50,13 +50,15 @@
                     <tr>
                         <td><%= h.getEntrada()%></td>
                         <td><%= h.getSaida()%></td>
-                        <td><a href="select?id=<%= h.getId() %>"> <button type="button" class="btn btn-secondary">Editar</button> </a></td>
+                        <td><a href="select?id=<%= h.getId() %>"> <button type="button" class="btn btn-secondary">Editar</button> </a>
+                                <a href="javascript: confirmar(<%= h.getId() %>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
+                        </td>
                     </tr>
                     <%}%>
                 </tbody>
             </table>
         </div>
 
-
+                <script src="js/confirmador.js"></script>
     </body>
 </html>
