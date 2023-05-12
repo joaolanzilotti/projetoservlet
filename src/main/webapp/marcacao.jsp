@@ -15,6 +15,39 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     </head>
     <body>
+
+       <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.jsp">Ponto</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Horário
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ponto">Registrar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Marcações
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="marcacao">Registrar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br>
+
         <h1>Registre sua Marcação</h1>
 
         <div class="container">
@@ -51,8 +84,8 @@
                     <tr>
                         <td><%= h.getEntrada()%></td>
                         <td><%= h.getSaida()%></td>
-                        <td><a href="select?id=<%= h.getId() %>"> <button type="button" class="btn btn-secondary">Editar</button> </a>
-                                <a href="javascript: confirmar(<%= h.getId() %>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
+                        <td><a href="select?id=<%= h.getId()%>"> <button type="button" class="btn btn-info">Editar</button> </a>
+                            <a href="javascript: confirmar(<%= h.getId()%>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
                         </td>
                     </tr>
                     <%}%>
@@ -60,6 +93,6 @@
             </table>
         </div>
 
-                <script src="js/confirmador.js"></script>
+        <script src="js/confirmador.js"></script>
     </body>
 </html>
