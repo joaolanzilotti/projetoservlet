@@ -1,6 +1,7 @@
 package com.prefeitura.projetoservlet.controller;
 
-import com.prefeitura.projetoservlet.model.Horario;
+import com.prefeitura.projetoservlet.model.DAO;
+import com.prefeitura.projetoservlet.model.HorarioTrabalho;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,14 +17,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joaoferretti
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/ponto"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/ponto","/select"})
 public class PontoController extends HttpServlet {
-
-    Horario horario = new Horario();
-    ArrayList<Horario> tabelaHorarioTrabalho;
-    ArrayList<Horario> marcacoesFeitas;
-    ArrayList<Horario> atraso;
-    ArrayList<Horario> horaExtra;
+    
+    DAO dao = new DAO();
+    HorarioTrabalho horario = new HorarioTrabalho();
+    ArrayList<HorarioTrabalho> tabelaHorarioTrabalho;
+    ArrayList<HorarioTrabalho> marcacoesFeitas;
+    ArrayList<HorarioTrabalho> atraso;
+    ArrayList<HorarioTrabalho> horaExtra;
 
     public PontoController() {
         super();
@@ -47,6 +49,8 @@ public class PontoController extends HttpServlet {
             horarios(request, response);
         }else if (action.equals("/insert")) {
             novoHorarioTrabalho(request, response);
+        }else if (action.equals("/select")) {
+            listarHorarios(request, response);
         }
         else{
             response.sendRedirect(request.getContextPath()+"index.html");
@@ -61,7 +65,7 @@ public class PontoController extends HttpServlet {
     }
 
     protected void horarios(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ArrayList<Horario> listHorariosTrabalhados = tabelaHorarioTrabalho;
+        ArrayList<HorarioTrabalho> listHorariosTrabalhados = dao.listarHorarioTrabalho();
         
         //Encaminhar a Lista ao Documento index.jsp
         request.setAttribute("horario", listHorariosTrabalhados);
@@ -71,18 +75,28 @@ public class PontoController extends HttpServlet {
     }
 
     protected void novoHorarioTrabalho(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        //Teste de Recebimento
-        System.out.println(request.getParameter("entrada"));
-        System.out.println(request.getParameter("saida"));
 
         //Recebendo os Valores nos Atributos
         horario.setEntrada(request.getParameter("entrada"));
         horario.setSaida(request.getParameter("saida"));
 
         //Inserir Ponto
-        tabelaHorarioTrabalho.add(horario);
+        dao.insertHorarioTrabalho(horario);
         response.sendRedirect("ponto");
+    }
+    
+    protected void listarHorarios(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        
+        horario.setId(request.getParameter("id"));
+        
+        dao.selecionarHorarioTrabalho(horario);
+        
+        request.setAttribute("id", horario.getId());
+        request.setAttribute("entrada", horario.getEntrada());
+        request.setAttribute("saida", horario.getSaida());
+        
+        RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+        rd.forward(request, response);
     }
 
 }

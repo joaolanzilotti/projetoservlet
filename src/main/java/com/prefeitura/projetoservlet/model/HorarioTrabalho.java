@@ -7,23 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Horario {
+@AllArgsConstructor
+@NoArgsConstructor
+public class HorarioTrabalho {
 
+    private String id;
     private String entrada;
     private String saida;
 
-    public Horario() {
-        super();
-    }
-    
-    
-
-    public Horario(String entrada, String saida) {
-        super();
-        this.entrada = entrada;
-        this.saida = saida;
-    }
-    
-    
 
 }
