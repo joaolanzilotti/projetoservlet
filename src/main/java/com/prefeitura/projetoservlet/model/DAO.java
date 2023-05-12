@@ -106,13 +106,100 @@ public class DAO implements Serializable {
         
     }
     
-    public void deletarContato(HorarioTrabalho horario){
+    public void deletarHorarioTrabalho(HorarioTrabalho horario){
         
         String delete = "delete from horariotrabalho where id=?";
         try{
             Connection con = conectar();
             PreparedStatement pst = con.prepareStatement(delete);
             pst.setString(1, horario.getId());
+            pst.executeUpdate();
+            con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
+    
+        
+     public ArrayList<Marcacoes> listarMarcacoes(){
+        ArrayList<Marcacoes> marcacoes = new ArrayList<>();
+        String listAllMarcacoes = "select * from marcacoes";
+        try{
+            Connection con = conectar();
+            PreparedStatement pst = con.prepareStatement(listAllMarcacoes);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                String id = rs.getString(1);
+                String entrada = rs.getString(2);
+                String saida = rs.getString(3);
+                marcacoes.add(new Marcacoes(id,entrada,saida));
+            }
+            con.close();
+            return marcacoes;
+        }catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+     
+         public void insertMarcacao(Marcacoes marcacao){
+        
+        String createMarcacao = "insert into marcacoes (entrada,saida) values (?,?)";
+        try {
+            Connection con = conectar();
+            PreparedStatement pst = con.prepareStatement(createMarcacao);
+            pst.setString(1, marcacao.getEntrada());
+            pst.setString(2, marcacao.getSaida());
+            pst.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+         
+         public void selecionarMarcacoes(Marcacoes marcacao){
+        String readMarcacao = "select * from marcacoes where id = ?";
+        try{
+            Connection con = conectar();
+            PreparedStatement pst = con.prepareStatement(readMarcacao);
+            pst.setString(1, marcacao.getId());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                marcacao.setId(rs.getString(1));
+                marcacao.setEntrada(rs.getString(2));
+                marcacao.setSaida(rs.getString(3));
+            }
+            con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+         
+          public void alterarMarcacao(Marcacoes marcacao){
+    
+        String update = "update marcacoes set entrada=?, saida=? where id=?";
+        try{
+             Connection con = conectar();
+             PreparedStatement pst = con.prepareStatement(update);
+             pst.setString(1, marcacao.getEntrada());
+             pst.setString(2, marcacao.getSaida());
+             pst.setString(3, marcacao.getId());
+             pst.executeUpdate();
+             con.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
+          
+           public void deletarMarcacao(Marcacoes marcacao){
+        
+        String delete = "delete from marcacoes where id=?";
+        try{
+            Connection con = conectar();
+            PreparedStatement pst = con.prepareStatement(delete);
+            pst.setString(1, marcacao.getId());
             pst.executeUpdate();
             con.close();
         }catch(Exception e){

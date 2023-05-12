@@ -114,7 +114,7 @@ public class PontoController extends HttpServlet {
 
         String id = request.getParameter("id");
         horario.setId(id);
-        dao.deletarContato(horario);
+        dao.deletarHorarioTrabalho(horario);
         response.sendRedirect("ponto");
 
     }

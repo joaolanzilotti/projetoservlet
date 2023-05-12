@@ -1,3 +1,5 @@
 com\prefeitura\projetoservlet\model\DAO.class
 com\prefeitura\projetoservlet\controller\PontoController.class
+com\prefeitura\projetoservlet\controller\MarcacaoController.class
+com\prefeitura\projetoservlet\model\Marcacoes.class
 com\prefeitura\projetoservlet\model\HorarioTrabalho.class
