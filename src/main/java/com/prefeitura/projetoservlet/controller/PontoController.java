@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joaoferretti
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/ponto", "/select", "/update", "/delete"})
+@WebServlet(urlPatterns = {"/add", "/ponto", "/selectPonto", "/updatePonto", "/deletePonto"})
 public class PontoController extends HttpServlet {
 
     DAO dao = new DAO();
@@ -45,13 +45,13 @@ public class PontoController extends HttpServlet {
         String action = request.getServletPath();
         if (action.equals("/ponto")) {
             horarios(request, response);
-        } else if (action.equals("/update")) {
+        } else if (action.equals("/updatePonto")) {
             editarContato(request, response);
-        } else if (action.equals("/insert")) {
+        } else if (action.equals("/add")) {
             novoHorarioTrabalho(request, response);
-        } else if (action.equals("/delete")) {
+        } else if (action.equals("/deletePonto")) {
             removerContato(request, response);
-        } else if (action.equals("/select")) {
+        } else if (action.equals("/selectPonto")) {
             listarHorarios(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "index.html");

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joaoferretti
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/insert", "/marcacao", "/select", "/update", "/delete"})
+@WebServlet(urlPatterns = {"/insert", "/marcacao", "/select", "/update", "/delete"})
 public class MarcacaoController extends HttpServlet {
 
     DAO dao = new DAO();

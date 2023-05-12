@@ -4,3 +4,4 @@ function confirmar(id){
         window.location.href = "delete?id=" + id;
     }
 }
+

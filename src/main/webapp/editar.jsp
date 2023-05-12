@@ -11,7 +11,7 @@
           <h1>Registre seu Ponto</h1>
 
         <div class="container">
-            <form name="formPonto" action="update" class="needs-validation"  novalidate>
+            <form name="formPonto" action="updatePonto" class="needs-validation"  novalidate>
                 <div class="row mb-3">
                     <label for="inputHoraEntrada" class="col-sm-2 col-form-label">ID</label>
                     <div class="col-sm-10">

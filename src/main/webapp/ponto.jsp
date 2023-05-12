@@ -17,7 +17,7 @@
         <h1>Registre seu Ponto</h1>
 
         <div class="container">
-            <form name="formPonto" action="insert" class="needs-validation"  novalidate>
+            <form name="formPonto" action="add" class="needs-validation"  novalidate>
                 <div class="row mb-3">
                     <label for="inputHoraEntrada" class="col-sm-2 col-form-label">Hora de entrada</label>
                     <div class="col-sm-10">
@@ -50,7 +50,7 @@
                     <tr>
                         <td><%= h.getEntrada()%></td>
                         <td><%= h.getSaida()%></td>
-                        <td><a href="select?id=<%= h.getId() %>"> <button type="button" class="btn btn-secondary">Editar</button> </a>
+                        <td><a href="selectPonto?id=<%= h.getId() %>"> <button type="button" class="btn btn-secondary">Editar</button> </a>
                                 <a href="javascript: confirmar(<%= h.getId() %>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
                         </td>
                     </tr>
@@ -59,6 +59,6 @@
             </table>
         </div>
 
-                <script src="js/confirmador.js"></script>
+                <script src="js/confirmadorPonto.js"></script>
     </body>
 </html>
