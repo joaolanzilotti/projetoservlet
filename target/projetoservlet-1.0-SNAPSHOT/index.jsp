@@ -17,6 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Inicio</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     </head>
     <body>
@@ -56,7 +57,7 @@
 
         <div class="container text-center">
             <div class="row">
-                <div class="card" style="width: 1075px;">
+                <div class="card" style="width: 1175px;">
                     <div class="card-body">
                         <h1>Sistema de Ponto</h1>
                     </div>
@@ -74,7 +75,7 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <h1>Registre seu Ponto</h1>
-                                        <a href="ponto"><button type="button" class="btn btn-primary">Registrar Horario de Trabalho</button></a>
+                                        <a href="ponto"><button type="button" class="btn btn-dark">Registrar Horario de Trabalho</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <h1>Registre sua Marcação</h1>
-                                        <a href="marcacao"><button type="button" class="btn btn-primary">Registrar Marcações</button></a>
+                                        <a href="marcacao"><button type="button" class="btn btn-dark">Registrar Marcações</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +109,8 @@
                         <div class="card" style="width: 500px;">
                             <div class="card-body">
                                 <h2>Tabela Horário Trabalho</h2>
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-striped table-bordered table-borderless">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col-3">Entrada</th>
                                             <th scope="col-3">Saida</th>
@@ -122,8 +123,8 @@
                                                 String saida = h.getSaida();
                                         %>
                                         <tr>
-                                            <td><%= h.getEntrada()%></td>
-                                            <td><%= h.getSaida()%></td>
+                                            <td><b><%= h.getEntrada()%></b></td>
+                                            <td><b><%= h.getSaida()%></b></td>
 
                                         </tr>
                                         <%}%>
@@ -138,8 +139,8 @@
                         <div class="card-body">
                             <div class="col">
                                 <h2>Tabela Marcações</h2>
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-striped table-bordered table-borderless">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col">Entrada</th>
                                             <th scope="col">Saida</th>
@@ -149,8 +150,8 @@
                                     <tbody>
                                         <% for (Marcacoes h : listaMarcacoes) {%>
                                         <tr>
-                                            <td><%= h.getEntrada()%></td>
-                                            <td><%= h.getSaida()%></td>
+                                            <td><b><%= h.getEntrada()%></b></td>
+                                            <td><b><%= h.getSaida()%></b></td>
 
                                         </tr>
                                         <%}%>
@@ -168,8 +169,8 @@
                         <div class="card-body">
                             <div class="col">
                                 <h2>Tabela Atraso</h2>
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-striped table-bordered table-borderless">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col">Atraso</th>
 
@@ -178,6 +179,7 @@
                                     <tbody>
                                         <% for (Marcacoes h : listaMarcacoes) {%>
                                         <% for (HorarioTrabalho ht : lista) {
+
                                                 String saidaMarcacoes = h.getSaida();
                                                 String saidaHorarioTrabalho = ht.getSaida();
 
@@ -187,7 +189,7 @@
 
                                         %>
                                         <tr>
-                                            <td><%= resultado.replace(".", ":").replace("-", "")%></td>
+                                            <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
 
                                         </tr>
                                         <%}%>
@@ -198,15 +200,15 @@
                         </div>
                     </div>
                 </div>
-                                    <div class="col">
+                <div class="col">
                     <br>
                     <br>
                     <div class="card" style="width: 500px;">
                         <div class="card-body">
                             <div class="col">
                                 <h2>Tabela Hora Extra</h2>
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-striped table-bordered table-borderless">
+                                    <thead class="table-dark">
                                         <tr>
                                             <th scope="col">Hora Extra</th>
 
@@ -224,7 +226,7 @@
 
                                         %>
                                         <tr>
-                                            <td><%= resultado.replace(".", ":").replace("-", "")%></td>
+                                            <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
 
                                         </tr>
                                         <%}%>

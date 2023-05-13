@@ -16,7 +16,7 @@
     </head>
     <body>
 
-       <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.jsp">Ponto</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,51 +47,81 @@
             </div>
         </nav>
         <br>
+       
+        <h1 class="text-center">Marcações Feitas</h1>
+         <br>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 1300px;">
+                        <div class="card-body">
+                            <br>
+                            <h2>Registre sua Marcação</h2>
+                            <br>
 
-        <h1>Registre sua Marcação</h1>
-
-        <div class="container">
-            <form name="formMarcacao" action="insert" class="needs-validation"  novalidate>
-                <div class="row mb-3">
-                    <label for="inputHoraEntrada" class="col-sm-2 col-form-label">Hora de entrada</label>
-                    <div class="col-sm-10">
-                        <input type="time" class="form-control" id="inputHoraEntrada" name="entrada" required>
+                            <div class="container-fluid h-100">
+                                <form name="formMarcacao" action="insert" class="needs-validation"  novalidate>
+                                    <div class="form-group">
+                                        <div class="row mb-3 justify-content-center align-items-center">
+                                            <label for="inputHoraEntrada" class="col-sm-2 col-form-label text-center"><b>Hora de entrada</b></label>
+                                            <div class="col-sm-3">
+                                                <input type="time" class="form-control form-control-lg" id="inputHoraEntrada" name="entrada" required>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 justify-content-center align-items-center">
+                                            <label for="inputHoraSaida" class="col-sm-2 col-form-label text-center"><b>Hora de saída</b></label>
+                                            <div class="col-sm-3">
+                                                <input type="time" class="form-control form-control-lg" id="inputHoraSaida" name="saida" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn-lg btn-dark">Registrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <br> <br>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2>Tabela Marcações Feitas</h2>
+                                        <br>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th scope="col-2">Entrada</th>
+                                                        <th scope="col-2">Saida</th>
+                                                        <th scope="col-4"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (Marcacoes h : lista) {%>
+                                                    <tr>
+                                                        <td><b><%= h.getEntrada()%></b></td>
+                                                        <td><b><%= h.getSaida()%></b></td>
+                                                        <td><a href="select?id=<%= h.getId()%>"> <button type="button" class="btn btn-primary">Editar</button> </a>
+                                                            <a href="javascript: confirmar(<%= h.getId()%>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <br>
                 </div>
-                <div class="row mb-3">
-                    <label for="inputHoraSaida" class="col-sm-2 col-form-label">Hora de saída</label>
-                    <div class="col-sm-10">
-                        <input type="time" class="form-control" id="inputHoraSaida" name="saida" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </div>
-            </form>
-            <h2>Tabela Horário de Trabalho</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Entrada</th>
-                        <th scope="col">Saida</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for (Marcacoes h : lista) {%>
-                    <tr>
-                        <td><%= h.getEntrada()%></td>
-                        <td><%= h.getSaida()%></td>
-                        <td><a href="select?id=<%= h.getId()%>"> <button type="button" class="btn btn-info">Editar</button> </a>
-                            <a href="javascript: confirmar(<%= h.getId()%>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
-                        </td>
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
+            </div>
         </div>
+
+
+
+
 
         <script src="js/confirmador.js"></script>
     </body>
