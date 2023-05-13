@@ -1,3 +1,5 @@
+<%@page import="java.time.Duration"%>
+<%@page import="java.time.LocalTime"%>
 <%@page import="com.prefeitura.projetoservlet.model.DAO"%>
 <%@page import="com.prefeitura.projetoservlet.model.Marcacoes"%>
 <%@page import="java.util.ArrayList"%>
@@ -115,7 +117,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for (HorarioTrabalho h : lista) {%>
+                                        <% for (HorarioTrabalho h : lista) {
+                                                String entrada = h.getEntrada();
+                                                String saida = h.getSaida();
+                                        %>
                                         <tr>
                                             <td><%= h.getEntrada()%></td>
                                             <td><%= h.getSaida()%></td>
@@ -155,10 +160,85 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col">
+                    <br>
+                    <br>
+                    <div class="card" style="width: 500px;">
+                        <div class="card-body">
+                            <div class="col">
+                                <h2>Tabela Atraso</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Atraso</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (Marcacoes h : listaMarcacoes) {%>
+                                        <% for (HorarioTrabalho ht : lista) {
+                                                String saidaMarcacoes = h.getSaida();
+                                                String saidaHorarioTrabalho = ht.getSaida();
+
+                                                Double atraso = Double.valueOf(saidaMarcacoes.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
+                                                String resultado = String.valueOf(atraso);
+
+
+                                        %>
+                                        <tr>
+                                            <td><%= resultado.replace(".", ":").replace("-", "")%></td>
+
+                                        </tr>
+                                        <%}%>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                    <div class="col">
+                    <br>
+                    <br>
+                    <div class="card" style="width: 500px;">
+                        <div class="card-body">
+                            <div class="col">
+                                <h2>Tabela Hora Extra</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Hora Extra</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (Marcacoes h : listaMarcacoes) {%>
+                                        <% for (HorarioTrabalho ht : lista) {
+                                                String entradaMarcacao = h.getEntrada();
+                                                String entradaHorarioTrabalho = ht.getEntrada();
+
+                                                Double extra = Double.valueOf(entradaMarcacao.replace(":", ".")) - Double.valueOf(entradaHorarioTrabalho.replace(":", "."));
+                                                String resultado = String.valueOf(extra);
+
+
+                                        %>
+                                        <tr>
+                                            <td><%= resultado.replace(".", ":").replace("-", "")%></td>
+
+                                        </tr>
+                                        <%}%>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-                                    <br>
-                                    <br>
+        <br>
+        <br>
 
 
 
