@@ -1,14 +1,10 @@
 package com.prefeitura.projetoservlet.controller;
 
-import com.prefeitura.projetoservlet.model.DAO;
-import com.prefeitura.projetoservlet.model.HorarioTrabalho;
 import com.prefeitura.projetoservlet.model.Marcacoes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/insert", "/marcacao", "/select", "/update", "/delete"})
 public class MarcacaoController extends HttpServlet {
 
-    DAO dao = new DAO();
     public static ArrayList<Marcacoes> marcacoesFeitas = new ArrayList<>();
 
     public MarcacaoController() {
@@ -57,10 +52,10 @@ public class MarcacaoController extends HttpServlet {
     }
 
     protected void marcacoes(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //ArrayList<Marcacoes> listMarcacoes = dao.listarMarcacoes();
+       
         ArrayList<Marcacoes> listMarcacoes = marcacoesFeitas;
 
-        //Encaminhar a Lista ao Documento index.jsp
+   
         request.setAttribute("marcacao", listMarcacoes);
         RequestDispatcher rd = request.getRequestDispatcher("marcacao.jsp");
         rd.forward(request, response);
@@ -70,7 +65,7 @@ public class MarcacaoController extends HttpServlet {
     protected void novaMarcacao(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Marcacoes marcacao = new Marcacoes();
 
-        //Recebendo os Valores nos Atributos
+     
         if (marcacoesFeitas.isEmpty()) {
             marcacao.setId("1");
         } else if (!marcacoesFeitas.isEmpty()) {
@@ -83,8 +78,7 @@ public class MarcacaoController extends HttpServlet {
         marcacao.setSaida(request.getParameter("saida"));
         System.out.println("ID AQUI" + marcacao.getId());
 
-        //Inserir Ponto
-        //dao.insertMarcacao(marcacao);
+  
         marcacoesFeitas.add(marcacao);
 
         response.sendRedirect("marcacao");

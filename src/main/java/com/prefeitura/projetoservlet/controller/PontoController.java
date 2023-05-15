@@ -1,14 +1,9 @@
 package com.prefeitura.projetoservlet.controller;
 
-import static com.prefeitura.projetoservlet.controller.MarcacaoController.marcacoesFeitas;
-import com.prefeitura.projetoservlet.model.DAO;
 import com.prefeitura.projetoservlet.model.HorarioTrabalho;
-import com.prefeitura.projetoservlet.model.Marcacoes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,14 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author joaoferretti
- */
+
 @WebServlet(urlPatterns = {"/add", "/ponto", "/selectPonto", "/updatePonto", "/deletePonto"})
 public class PontoController extends HttpServlet {
 
-    DAO dao = new DAO();
     public static ArrayList<HorarioTrabalho> tabelaHorarioTrabalho = new ArrayList<>();
 
     public PontoController() {
@@ -73,7 +64,7 @@ public class PontoController extends HttpServlet {
 
     protected void novoHorarioTrabalho(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HorarioTrabalho horario = new HorarioTrabalho();
-        //Recebendo os Valores nos Atributos
+
         if (tabelaHorarioTrabalho.isEmpty()) {
             horario.setId("1");
         } else if (!tabelaHorarioTrabalho.isEmpty()) {
@@ -83,12 +74,10 @@ public class PontoController extends HttpServlet {
             horario.setId(String.valueOf(resultadoId));
         }
 
-        //Recebendo os Valores nos Atributos
         horario.setEntrada(request.getParameter("entrada"));
         horario.setSaida(request.getParameter("saida"));
 
-        //Inserir Ponto
-        // dao.insertHorarioTrabalho(horario);
+
         tabelaHorarioTrabalho.add(horario);
         response.sendRedirect("ponto");
     }

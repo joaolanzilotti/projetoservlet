@@ -2,7 +2,6 @@
 <%@page import="com.prefeitura.projetoservlet.controller.PontoController"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalTime"%>
-<%@page import="com.prefeitura.projetoservlet.model.DAO"%>
 <%@page import="com.prefeitura.projetoservlet.model.Marcacoes"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.prefeitura.projetoservlet.model.HorarioTrabalho"%>
@@ -193,21 +192,27 @@
                                                             String entradaHorarioTrabalho = ht.getEntrada();
                                                             String entradaMarcacoes = h.getEntrada();
 
-                                                           if (Integer.valueOf(saidaMarcacoes.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
+                                                            if (Integer.valueOf(saidaMarcacoes.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
                                                                 atraso = Double.valueOf(saidaMarcacoes.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
                                                                 resultado = String.valueOf(atraso);
-                                                            } 
-                                                        
-                                                             if (Integer.valueOf(entradaMarcacoes.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                            }
+
+                                                            if (Integer.valueOf(entradaMarcacoes.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
                                                                 atraso = Double.valueOf(entradaHorarioTrabalho.replace(":", ".")) - Double.valueOf(entradaMarcacoes.replace(":", "."));
                                                                 resultado = String.valueOf(atraso);
-                                                            } ;
-                                                      
+                                                            };
+                                                            
+                                                             if (Integer.valueOf(entradaMarcacoes.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                                resultado = "0";
+                                                            }
+                                                             if (Integer.valueOf(saidaMarcacoes.replace(":", "")) > Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
+                                                                resultado = "0";
+                                                            }
 
 
                                                     %>
                                                     <tr>
-                                                        <td><b><%= resultado.replace(".", ":").replace("-", "") %></b></td>
+                                                        <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
 
                                                     </tr>
                                                     <%}%>
@@ -241,17 +246,18 @@
                                                             String saidaHorarioTrabalho = ht.getSaida();
                                                             String entradaMarcacao = h.getEntrada();
                                                             String entradaHorarioTrabalho = ht.getEntrada();
+
                                                             if (Integer.valueOf(saidaMarcacao.replace(":", "")) > Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
                                                                 extra = Double.valueOf(saidaMarcacao.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
                                                                 resultado = String.valueOf(extra);
-                                                            } 
+                                                            }
                                                             if (Integer.valueOf(saidaMarcacao.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
                                                                 resultado = "0";
-                                                            } 
-                                                             if (Integer.valueOf(entradaMarcacao.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                            }
+                                                            if (Integer.valueOf(entradaMarcacao.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
                                                                 extra = Double.valueOf(entradaMarcacao.replace(":", ".")) - Double.valueOf(entradaHorarioTrabalho.replace(":", "."));
                                                                 resultado = String.valueOf(extra);
-                                                            } 
+                                                            }
                                                             if (Integer.valueOf(entradaMarcacao.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
                                                                 resultado = "0";
                                                             };
@@ -259,7 +265,7 @@
 
                                                     %>
                                                     <tr>
-                                                        <td><b><%= resultado.replace(".", ":").replace("-", "") %></b></td>
+                                                        <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
 
                                                     </tr>
                                                     <%}%>

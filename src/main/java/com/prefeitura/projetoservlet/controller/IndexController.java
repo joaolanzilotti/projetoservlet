@@ -1,11 +1,9 @@
 
 package com.prefeitura.projetoservlet.controller;
 
-import static com.prefeitura.projetoservlet.controller.MarcacaoController.marcacoesFeitas;
 import com.prefeitura.projetoservlet.model.HorarioTrabalho;
 import com.prefeitura.projetoservlet.model.Marcacoes;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,10 +43,7 @@ public class IndexController extends HttpServlet {
     }
     
       protected void tabelas(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //ArrayList<Marcacoes> listMarcacoes = dao.listarMarcacoes();
-
-
-        //Encaminhar a Lista ao Documento index.jsp
+          
         request.setAttribute("marcacao", listMarcacoes);
         request.setAttribute("horario", listHorarioTrabalho);
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
