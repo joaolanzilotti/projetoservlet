@@ -18,7 +18,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.jsp">Ponto</a>
+                <a class="navbar-brand" href="index">Ponto</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,18 +47,18 @@
             </div>
         </nav>
         <br>
-       
+
         <h1 class="text-center">Horário de Trabalho</h1>
-         <br>
+        <br>
         <div class="container text-center">
             <div class="row">
-                <div class="col">
-                    <div class="card" style="width: 1300px;">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
                         <div class="card-body">
                             <br>
                             <h2>Registre seu Horário de Trabalho</h2>
                             <br>
-                      
+
 
                             <div class="container-fluid h-100">
                                 <form name="formMarcacao" action="add" class="needs-validation"  novalidate>
@@ -115,15 +115,17 @@
                             </div>
                         </div>
                     </div>
-                    <br>
                 </div>
             </div>
         </div>
+        <br>
 
 
 
 
 
-        <script src="js/confirmadorPonto.js"></script>
-    </body>
+
+
+<script src="js/confirmadorPonto.js"></script>
+</body>
 </html>

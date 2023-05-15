@@ -8,6 +8,10 @@
         <servlet-name>PontoController</servlet-name>
         <servlet-class>com.prefeitura.projetoservlet.controller.PontoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InicioController</servlet-name>
+        <servlet-class>com.prefeitura.projetoservlet.controller.IndexController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MarcacaoController</servlet-name>
         <url-pattern>/marcacao/*</url-pattern>
@@ -17,6 +21,10 @@
         <url-pattern>/ponto/*</url-pattern>
     </servlet-mapping>
     <display-name>projetoservlet</display-name>
+    <servlet-mapping>
+        <servlet-name>InicioController</servlet-name>
+        <url-pattern>/inicio/*</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>

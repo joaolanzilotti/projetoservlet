@@ -1,3 +1,5 @@
+<%@page import="com.prefeitura.projetoservlet.controller.MarcacaoController"%>
+<%@page import="com.prefeitura.projetoservlet.controller.PontoController"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalTime"%>
 <%@page import="com.prefeitura.projetoservlet.model.DAO"%>
@@ -7,9 +9,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    DAO dao = new DAO();
-    List<HorarioTrabalho> lista = dao.listarHorarioTrabalho();
-    List<Marcacoes> listaMarcacoes = dao.listarMarcacoes();
+    List<HorarioTrabalho> lista = (ArrayList<HorarioTrabalho>) request.getAttribute("horario");
+    List<Marcacoes> listaMarcacoes = (ArrayList<Marcacoes>) request.getAttribute("marcacao");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.jsp">Ponto</a>
+                <a class="navbar-brand" href="index">Ponto</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -55,192 +56,229 @@
 
         <br>
 
-        <div class="container text-center">
+        <div class="container">
             <div class="row">
-                <div class="card" style="width: 1175px;">
-                    <div class="card-body">
-                        <h1>Sistema de Ponto</h1>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1>Sistema de Ponto</h1>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <br>
-        <div class="container text-center">
-            <div class="row align-items-start">
-                <div class="col">
-                    <div class="card" style="width: 500px;">
-                        <div class="card-body">
-                            <div class="container text-center">
-                                <div class="row">
-                                    <div class="col-md">
-                                        <h1>Registre seu Ponto</h1>
-                                        <a href="ponto"><button type="button" class="btn btn-dark">Registrar Horario de Trabalho</button></a>
+                    <br>
+                    <div class="container text-center">
+                        <div class="row align-items-start">
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="container text-center">
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <h2>Registre seu Horário de Trabalho</h2>
+                                                    <br>
+                                                    <br>
+                                                    <a href="ponto"><button type="button" class="btn btn-dark">Registrar Horario de Trabalho</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="container text-center">
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <h2>Registre sua Marcação</h2>
+                                                    <br>
+                                                    <br>
+                                                    <a href="marcacao"><button type="button" class="btn btn-dark">Registrar Marcações</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 500px;">
-                        <div class="card-body">
-                            <div class="container text-center">
-                                <div class="row">
-                                    <div class="col-md">
-                                        <h1>Registre sua Marcação</h1>
-                                        <a href="marcacao"><button type="button" class="btn btn-dark">Registrar Marcações</button></a>
+                    <br>
+                    <br>
+
+
+                    <div class="container text-center">
+                        <div class="row align-items-start">
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2>Tabela de Horários de Trabalho</h2>
+                                            <table class="table table-striped table-bordered table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th scope="col-3">Entrada</th>
+                                                        <th scope="col-3">Saida</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (HorarioTrabalho t : lista) {%>
+                                                    <tr>
+                                                        <td><b><%= t.getEntrada()%></b></td>
+                                                        <td><b><%= t.getSaida()%></b></td>
+
+                                                    </tr>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="col">
+                                            <h2>Tabela de Marcações</h2>
+                                            <table class="table table-striped table-bordered table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th scope="col">Entradas</th>
+                                                        <th scope="col">Saidas</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (Marcacoes h : listaMarcacoes) {%>
+                                                    <tr>
+                                                        <td><b><%= h.getEntrada()%></b></td>
+                                                        <td><b><%= h.getSaida()%></b></td>
+
+                                                    </tr>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <br>
+                                <br>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="col">
+                                            <h2>Tabela de Atrasos</h2>
+                                            <table class="table table-striped table-bordered table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th scope="col">Atrasos</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (Marcacoes h : listaMarcacoes) {%>
+                                                    <% for (HorarioTrabalho ht : lista) {
+
+                                                            Double atraso;
+                                                            String resultado = "0";
+
+                                                            String saidaMarcacoes = h.getSaida();
+                                                            String saidaHorarioTrabalho = ht.getSaida();
+                                                            String entradaHorarioTrabalho = ht.getEntrada();
+                                                            String entradaMarcacoes = h.getEntrada();
+
+                                                           if (Integer.valueOf(saidaMarcacoes.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
+                                                                atraso = Double.valueOf(saidaMarcacoes.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
+                                                                resultado = String.valueOf(atraso);
+                                                            } 
+                                                        
+                                                             if (Integer.valueOf(entradaMarcacoes.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                                atraso = Double.valueOf(entradaHorarioTrabalho.replace(":", ".")) - Double.valueOf(entradaMarcacoes.replace(":", "."));
+                                                                resultado = String.valueOf(atraso);
+                                                            } ;
+                                                      
+
+
+                                                    %>
+                                                    <tr>
+                                                        <td><b><%= resultado.replace(".", ":").replace("-", "") %></b></td>
+
+                                                    </tr>
+                                                    <%}%>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <br>
+                                <br>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="col">
+                                            <h2>Tabela de Horas Extras</h2>
+                                            <table class="table table-striped table-bordered table-borderless">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th scope="col">Horas Extras</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (Marcacoes h : listaMarcacoes) {%>
+                                                    <% for (HorarioTrabalho ht : lista) {
+                                                            Double extra;
+                                                            String resultado = "0";
+                                                            String saidaMarcacao = h.getSaida();
+                                                            String saidaHorarioTrabalho = ht.getSaida();
+                                                            String entradaMarcacao = h.getEntrada();
+                                                            String entradaHorarioTrabalho = ht.getEntrada();
+                                                            if (Integer.valueOf(saidaMarcacao.replace(":", "")) > Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
+                                                                extra = Double.valueOf(saidaMarcacao.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
+                                                                resultado = String.valueOf(extra);
+                                                            } 
+                                                            if (Integer.valueOf(saidaMarcacao.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
+                                                                resultado = "0";
+                                                            } 
+                                                             if (Integer.valueOf(entradaMarcacao.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                                extra = Double.valueOf(entradaMarcacao.replace(":", ".")) - Double.valueOf(entradaHorarioTrabalho.replace(":", "."));
+                                                                resultado = String.valueOf(extra);
+                                                            } 
+                                                            if (Integer.valueOf(entradaMarcacao.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
+                                                                resultado = "0";
+                                                            };
+
+
+                                                    %>
+                                                    <tr>
+                                                        <td><b><%= resultado.replace(".", ":").replace("-", "") %></b></td>
+
+                                                    </tr>
+                                                    <%}%>
+                                                    <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
-        <br>
-        <br>
 
 
-        <div class="container text-center">
-            <div class="row align-items-start">
-                <div class="col">
-                    <div class="col">
-                        <div class="card" style="width: 500px;">
-                            <div class="card-body">
-                                <h2>Tabela Horário Trabalho</h2>
-                                <table class="table table-striped table-bordered table-borderless">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col-3">Entrada</th>
-                                            <th scope="col-3">Saida</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (HorarioTrabalho h : lista) {
-                                                String entrada = h.getEntrada();
-                                                String saida = h.getSaida();
-                                        %>
-                                        <tr>
-                                            <td><b><%= h.getEntrada()%></b></td>
-                                            <td><b><%= h.getSaida()%></b></td>
-
-                                        </tr>
-                                        <%}%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 500px;">
-                        <div class="card-body">
-                            <div class="col">
-                                <h2>Tabela Marcações</h2>
-                                <table class="table table-striped table-bordered table-borderless">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Entrada</th>
-                                            <th scope="col">Saida</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (Marcacoes h : listaMarcacoes) {%>
-                                        <tr>
-                                            <td><b><%= h.getEntrada()%></b></td>
-                                            <td><b><%= h.getSaida()%></b></td>
-
-                                        </tr>
-                                        <%}%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <br>
-                    <br>
-                    <div class="card" style="width: 500px;">
-                        <div class="card-body">
-                            <div class="col">
-                                <h2>Tabela Atraso</h2>
-                                <table class="table table-striped table-bordered table-borderless">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Atraso</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (Marcacoes h : listaMarcacoes) {%>
-                                        <% for (HorarioTrabalho ht : lista) {
-
-                                                String saidaMarcacoes = h.getSaida();
-                                                String saidaHorarioTrabalho = ht.getSaida();
-
-                                                Double atraso = Double.valueOf(saidaMarcacoes.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
-                                                String resultado = String.valueOf(atraso);
-
-
-                                        %>
-                                        <tr>
-                                            <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
-
-                                        </tr>
-                                        <%}%>
-                                        <%}%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <br>
-                    <br>
-                    <div class="card" style="width: 500px;">
-                        <div class="card-body">
-                            <div class="col">
-                                <h2>Tabela Hora Extra</h2>
-                                <table class="table table-striped table-bordered table-borderless">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Hora Extra</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (Marcacoes h : listaMarcacoes) {%>
-                                        <% for (HorarioTrabalho ht : lista) {
-                                                String entradaMarcacao = h.getEntrada();
-                                                String entradaHorarioTrabalho = ht.getEntrada();
-
-                                                Double extra = Double.valueOf(entradaMarcacao.replace(":", ".")) - Double.valueOf(entradaHorarioTrabalho.replace(":", "."));
-                                                String resultado = String.valueOf(extra);
-
-
-                                        %>
-                                        <tr>
-                                            <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
-
-                                        </tr>
-                                        <%}%>
-                                        <%}%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
 
 
 

@@ -18,7 +18,7 @@
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.jsp">Ponto</a>
+                <a class="navbar-brand" href="index">Ponto</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -52,8 +52,8 @@
          <br>
         <div class="container text-center">
             <div class="row">
-                <div class="col">
-                    <div class="card" style="width: 1300px;">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
                         <div class="card-body">
                             <br>
                             <h2>Registre sua Marcação</h2>
@@ -97,11 +97,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% for (Marcacoes h : lista) {%>
+                                                    <% for (Marcacoes h : lista) { %>
                                                     <tr>
                                                         <td><b><%= h.getEntrada()%></b></td>
                                                         <td><b><%= h.getSaida()%></b></td>
-                                                        <td><a href="select?id=<%= h.getId()%>"> <button type="button" class="btn btn-primary">Editar</button> </a>
+                                                        <td><a href="select?id=<%=h.getId()%>"> <button type="button" class="btn btn-primary">Editar</button> </a>
                                                             <a href="javascript: confirmar(<%= h.getId()%>)"> <button type="button" class="btn btn-danger">Excluir</button> </a>
                                                         </td>
                                                     </tr>

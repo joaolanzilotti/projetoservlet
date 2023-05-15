@@ -18,5 +18,11 @@ public class Marcacoes {
     private String id;
     private String entrada;
     private String saida;
+
+    public Marcacoes(String id) {
+        this.id = id;
+    }
+    
+    
     
 }
