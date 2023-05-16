@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>PontoController</servlet-name>
-        <servlet-class>com.prefeitura.projetoservlet.controller.PontoController</servlet-class>
+        <servlet-class>com.prefeitura.projetoservlet.controller.HorarioTrabalhoController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InicioController</servlet-name>

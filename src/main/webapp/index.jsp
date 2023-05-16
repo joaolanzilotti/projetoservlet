@@ -1,5 +1,4 @@
 <%@page import="com.prefeitura.projetoservlet.controller.MarcacaoController"%>
-<%@page import="com.prefeitura.projetoservlet.controller.PontoController"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalTime"%>
 <%@page import="com.prefeitura.projetoservlet.model.Marcacoes"%>
@@ -37,7 +36,7 @@
                                 Horário
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="ponto">Registrar</a></li>
+                                <li><a class="dropdown-item" href="horariotrabalho">Registrar</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -80,7 +79,7 @@
                                                     <h2>Registre seu Horário de Trabalho</h2>
                                                     <br>
                                                     <br>
-                                                    <a href="ponto"><button type="button" class="btn btn-dark">Registrar Horario de Trabalho</button></a>
+                                                    <a href="horariotrabalho"><button type="button" class="btn btn-dark">Registrar Horario de Trabalho</button></a>
                                                 </div>
                                             </div>
                                         </div>

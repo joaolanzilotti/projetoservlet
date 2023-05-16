@@ -24,7 +24,7 @@
                                 Horário
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="ponto">Registrar</a></li>
+                                <li><a class="dropdown-item" href="horariotrabalho">Registrar</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

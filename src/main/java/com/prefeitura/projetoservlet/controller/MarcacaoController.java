@@ -40,7 +40,7 @@ public class MarcacaoController extends HttpServlet {
         } else if (action.equals("/select")) {
             listarMarcacoes(request, response);
         } else {
-            response.sendRedirect(request.getContextPath() + "index.html");
+            response.sendRedirect(request.getContextPath() + "index.jsp");
         }
 
     }

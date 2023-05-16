@@ -21,7 +21,7 @@ public class IndexController extends HttpServlet {
     @Override
     public void init() {
         listMarcacoes =  MarcacaoController.marcacoesFeitas;
-        listHorarioTrabalho = PontoController.tabelaHorarioTrabalho;
+        listHorarioTrabalho = HorarioTrabalhoController.tabelaHorarioTrabalho;
     }
 
 
