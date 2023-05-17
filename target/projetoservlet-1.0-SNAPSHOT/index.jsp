@@ -1,3 +1,4 @@
+<%@page import="com.prefeitura.projetoservlet.controller.IndexController"%>
 <%@page import="com.prefeitura.projetoservlet.controller.MarcacaoController"%>
 <%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalTime"%>
@@ -9,6 +10,10 @@
 <%
     List<HorarioTrabalho> lista = (ArrayList<HorarioTrabalho>) request.getAttribute("horario");
     List<Marcacoes> listaMarcacoes = (ArrayList<Marcacoes>) request.getAttribute("marcacao");
+    List<String> horaExtra = new ArrayList<>();
+    List<String> atraso = new ArrayList<>();
+    
+IndexController.realizarSubtracao(lista, listaMarcacoes, horaExtra, atraso);
 %>
 <!DOCTYPE html>
 <html>
@@ -180,42 +185,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% for (Marcacoes h : listaMarcacoes) {%>
-                                                    <% for (HorarioTrabalho ht : lista) {
+                                                    <%
 
-                                                            Double atraso;
-                                                            String resultado = "0";
-
-                                                            String saidaMarcacoes = h.getSaida();
-                                                            String saidaHorarioTrabalho = ht.getSaida();
-                                                            String entradaHorarioTrabalho = ht.getEntrada();
-                                                            String entradaMarcacoes = h.getEntrada();
-
-                                                            if (Integer.valueOf(saidaMarcacoes.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
-                                                                atraso = Double.valueOf(saidaMarcacoes.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
-                                                                resultado = String.valueOf(atraso);
-                                                            }
-
-                                                            if (Integer.valueOf(entradaMarcacoes.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
-                                                                atraso = Double.valueOf(entradaHorarioTrabalho.replace(":", ".")) - Double.valueOf(entradaMarcacoes.replace(":", "."));
-                                                                resultado = String.valueOf(atraso);
-                                                            };
-                                                            
-                                                             if (Integer.valueOf(entradaMarcacoes.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
-                                                                resultado = "0";
-                                                            }
-                                                             if (Integer.valueOf(saidaMarcacoes.replace(":", "")) > Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
-                                                                resultado = "0";
-                                                            }
+                                                       for(String a : atraso){
 
 
                                                     %>
                                                     <tr>
-                                                        <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
+                                                        <td><b><%= a%></b></td>
 
                                                     </tr>
-                                                    <%}%>
-                                                    <%}%>
+                                                     <%}%>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -237,37 +217,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% for (Marcacoes h : listaMarcacoes) {%>
-                                                    <% for (HorarioTrabalho ht : lista) {
-                                                            Double extra;
-                                                            String resultado = "0";
-                                                            String saidaMarcacao = h.getSaida();
-                                                            String saidaHorarioTrabalho = ht.getSaida();
-                                                            String entradaMarcacao = h.getEntrada();
-                                                            String entradaHorarioTrabalho = ht.getEntrada();
 
-                                                            if (Integer.valueOf(saidaMarcacao.replace(":", "")) > Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
-                                                                extra = Double.valueOf(saidaMarcacao.replace(":", ".")) - Double.valueOf(saidaHorarioTrabalho.replace(":", "."));
-                                                                resultado = String.valueOf(extra);
-                                                            }
-                                                            if (Integer.valueOf(saidaMarcacao.replace(":", "")) < Integer.valueOf(saidaHorarioTrabalho.replace(":", ""))) {
-                                                                resultado = "0";
-                                                            }
-                                                            if (Integer.valueOf(entradaMarcacao.replace(":", "")) < Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
-                                                                extra = Double.valueOf(entradaMarcacao.replace(":", ".")) - Double.valueOf(entradaHorarioTrabalho.replace(":", "."));
-                                                                resultado = String.valueOf(extra);
-                                                            }
-                                                            if (Integer.valueOf(entradaMarcacao.replace(":", "")) > Integer.valueOf(entradaHorarioTrabalho.replace(":", ""))) {
-                                                                resultado = "0";
-                                                            };
-
-
+                                                    <%
+                                                        
+                                                    for (String h : horaExtra){
                                                     %>
                                                     <tr>
-                                                        <td><b><%= resultado.replace(".", ":").replace("-", "")%></b></td>
+                                                        <td><b><%= h%></b></td>
 
                                                     </tr>
-                                                    <%}%>
                                                     <%}%>
                                                 </tbody>
                                             </table>

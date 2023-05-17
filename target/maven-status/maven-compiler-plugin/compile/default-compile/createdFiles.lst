@@ -1,4 +1,4 @@
-com\prefeitura\projetoservlet\controller\PontoController.class
+com\prefeitura\projetoservlet\controller\HorarioTrabalhoController.class
 com\prefeitura\projetoservlet\controller\MarcacaoController.class
 com\prefeitura\projetoservlet\model\Marcacoes.class
 com\prefeitura\projetoservlet\controller\IndexController.class
