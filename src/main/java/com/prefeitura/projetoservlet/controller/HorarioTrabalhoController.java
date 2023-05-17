@@ -52,10 +52,8 @@ public class HorarioTrabalhoController extends HttpServlet {
     }
 
     protected void horarios(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //ArrayList<HorarioTrabalho> listHorariosTrabalhados = dao.listarHorarioTrabalho();
         ArrayList<HorarioTrabalho> listHorariosTrabalhados = tabelaHorarioTrabalho;
 
-        //Encaminhar a Lista ao Documento index.jsp
         request.setAttribute("horario", listHorariosTrabalhados);
         RequestDispatcher rd = request.getRequestDispatcher("horarioTrabalho.jsp");
         rd.forward(request, response);

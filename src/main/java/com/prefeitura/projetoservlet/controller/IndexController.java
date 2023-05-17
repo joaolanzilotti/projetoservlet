@@ -46,48 +46,29 @@ public class IndexController extends HttpServlet {
                 LocalTime inicioTabela2 = LocalTime.parse(marcacoes.getEntrada(), DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime fimTabela2 = LocalTime.parse(marcacoes.getSaida(), DateTimeFormatter.ofPattern("HH:mm"));
                 
-                if (inicioTabela2.isAfter(inicioTabela1) && fimTabela2.isBefore(fimTabela1)) {
-                    System.out.println("4");
-                    horaExtra.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
-                    atraso.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
-                    atraso.add(fimTabela1.toString() + " às " + fimTabela2.toString());
-
-                }
-
-                else if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isAfter(fimTabela1) && fimTabela2.isAfter(inicioTabela1)) {
-                    System.out.println("1");
-                    horaExtra.add(inicioTabela2.toString() + " às " + inicioTabela1.toString());
-                    horaExtra.add(inicioTabela1.toString() + " às " + fimTabela1.toString());
+                 if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isAfter(fimTabela1) && fimTabela2.isAfter(inicioTabela1)) {
+                    horaExtra.add(inicioTabela2.toString() + " às " + inicioTabela1.toString());    
                     horaExtra.add(fimTabela1.toString() + " às " + fimTabela2.toString());
+                    
+                  
                 } else if (inicioTabela2.isAfter(inicioTabela1) && fimTabela2.isBefore(fimTabela1) && fimTabela2.isBefore(inicioTabela1)) {
                     atraso.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
-                    System.out.println("2");
                     atraso.add(inicioTabela2.toString() + " às " + fimTabela2.toString());
                     atraso.add(fimTabela2.toString() + " às " + fimTabela1.toString());
                 } else if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isAfter(fimTabela1)) {
-                    System.out.println("3");
                     horaExtra.add(fimTabela1.toString() + " às " + fimTabela2.toString());
                     atraso.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
 
-                } else if (inicioTabela2.isAfter(inicioTabela1) && fimTabela2.isBefore(fimTabela1)) {
-                    System.out.println("4");
-                    horaExtra.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
-                    atraso.add(fimTabela1.toString() + " às " + fimTabela2.toString());
-
-                } else if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isBefore(fimTabela1)) {
-                    System.out.println("5");
+                }  else if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isBefore(fimTabela1)) {
                     horaExtra.add(inicioTabela2.toString() + " às " + inicioTabela1.toString());
                     atraso.add(fimTabela2.toString() + " às " + fimTabela1.toString());
                 } else if (inicioTabela2.isAfter(inicioTabela1) && fimTabela2.isAfter(fimTabela1)) {
-                    System.out.println("6");
                     horaExtra.add(fimTabela1.toString() + " às " + fimTabela2.toString());
                     atraso.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
                 } else if (inicioTabela2.isAfter(inicioTabela1) && fimTabela2.isBefore(fimTabela1)) {
-                    System.out.println("7");
                     atraso.add(inicioTabela1.toString() + " às " + inicioTabela2.toString());
                     atraso.add(fimTabela2.toString() + " às " + fimTabela1.toString());
                 } else if (inicioTabela2.isBefore(inicioTabela1) && fimTabela2.isAfter(fimTabela1)) {
-                    System.out.println("8");
                     horaExtra.add(inicioTabela2.toString() + " às " + inicioTabela1.toString());
                     horaExtra.add(fimTabela1.toString() + " às " + fimTabela2.toString());
                 } else if (inicioTabela2.isBefore(inicioTabela1)) {
